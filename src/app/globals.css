@@ -1,5 +1,6 @@
-@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
+@import "tailwindcss";
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -21,6 +22,97 @@
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--background);
+  font-family: "Work Sans", Arial, Helvetica, sans-serif;
+}
+
+.text-title {
+  @apply text-white tracking-tighter text-5xl md:text-9xl;
+}
+
+.text-subtitle {
+  @apply text-white tracking-tighter text-2xl md:text-5xl;
+}
+
+.subtitle {
+  @apply text-white tracking-tighter text-4xl md:text-7xl;
+}
+
+.text-playfair {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+}
+
+.menu-items-hover {
+  @apply  text-white transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-pink-500
+}
+
+
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  75% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+.hover-shake:hover {
+  animation: shake 0.2s ease-in-out infinite;
+}
+
+
+
+
+/* html {
+  scroll-snap-type: y mandatory;
+} */
+
+/* Ya no lo pongas en html */
+.img-gallery-wrapper {
+  scroll-snap-type: y mandatory;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.img-container {
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.img-container > div {
+  width: 300px;
+  height: 400px;
+  margin: 20px;
+  background: #f5f5f5;
+  overflow: hidden;
+  position: relative;
+}
+
+.img-container h2 {
+  color: #ff66c4;
+  font-family: "Azeret Mono", monospace;
+  font-size: 50px;
+  font-weight: 700;
+  letter-spacing: -3px;
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 120px);
+  transform: translate(-50%, -50%);
+}
+
+.progress {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 7px;
+  background: #ff66c4;
+  bottom: 0px;  /* Distancia desde el fondo de la pantalla */
+  transform: scaleX(0);  /* Inicialmente el progreso está en 0 */
+  transform-origin: left center;  /* El progreso se "crece" desde la izquierda */
+  transition: transform 0.25s ease-out;  /* Suavizar la animación */
 }
