@@ -79,7 +79,7 @@ const Card = ({ index, active, setActive, cardsData }: any) => {
                   autoPlay
                   poster="/poster-image.jpg"
                 >
-                  <source src="/videos/prueba.mov" type="video/mp4" />
+                  {/* <source src="/videos/prueba.mov" type="video/mp4" /> */}
                   Tu navegador no soporta videos.
                 </video>
               </div>
