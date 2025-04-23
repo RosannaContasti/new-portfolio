@@ -28,7 +28,10 @@ const socialLinks = [
 
 const Contact = () => {
   return (
-    <div id="contact" className="h-screen flex flex-col md:flex-row text-center bg-white">
+    <div
+      id="contact"
+      className="h-screen flex flex-col md:flex-row text-center bg-white"
+    >
       {/* ------------------------ */}
       <div className="w-full md:w-1/2 p-10 flex flex-col justify-around items-start px-16">
         {/* Texto */}
@@ -70,7 +73,7 @@ const Contact = () => {
           height={100} // Alto en píxeles
           className=" w-96 max-w-full object-cover"
         />
-        <button className="bg-black text-white w-56 h-16 font-bold md:my-24 md:mx-28">
+        <button className="bg-black text-white w-56 h-16 font-bold md:my-24 md:mx-28 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl hover:bg-[#ffffff] hover:text-black">
           CONTACTAME
         </button>
       </div>

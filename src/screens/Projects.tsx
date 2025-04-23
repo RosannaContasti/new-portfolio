@@ -8,11 +8,10 @@ export const Projects = () => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   const cardsData = [
-    "Card 1 info",
+    "Una aplicación desarrollada con React Native y Styled Components para Proyecto Sirenas, una iniciativa argentina fundada por Agostina Bisio. El objetivo de la aplicación es acompañar a mujeres en la adopción de hábitos de vida más saludables y mejorar su calidad de vida.La aplicación incluye funcionalidades como video en vivo, galería de audio y video, chat con dupla y comunidad, y búsqueda de match para apoyo mutuo en el proceso de pérdida de peso. También cuenta con calendario y agenda, registro de comidas, hidratación, sueño, ánimo y ejercicio, además de herramientas para subir fotos y ver estadísticas personales. En la sección de pagos, se ofrece soporte para transferencia bancaria, MercadoPago y PayPal.",
     "Card 2 info",
     "Card 3 info",
     "Card 4 info",
-    "Card 5 info",
   ];
 
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -29,7 +28,7 @@ export const Projects = () => {
 
   return (
     <section
-    id="projects"
+      id="projects"
       className="min-h-screen bg-cover bg-center flex flex-col px-4 py-10"
       style={{ backgroundImage: "url('/projectCover.png')" }}
     >
@@ -43,19 +42,19 @@ export const Projects = () => {
       >
         {/* Flecha izquierda */}
         <button
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white"
+          className="absolute md:w-44 left-0 top-1/2 -translate-y-1/2 z-10 p-2 hover:bg-opacity-70 text-white"
           onClick={() => scrollCarousel("left")}
         >
-          <i className="fas fa-chevron-left fa-2x" />
+          <i className="fas fa-chevron-left fa-5x opacity-50" />
         </button>
 
         {/* Contenedor de Cards con scroll */}
         <div
           ref={carouselRef}
-          className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 px-2"
+          className="flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none]  "
         >
-          {cardsData.map((info, index) => (
-            <div key={index} className="snap-start flex-shrink-0 w-[300px]">
+          {cardsData?.map((info, index) => (
+            <div key={index} className="md:w-[300px]">
               <Card
                 index={index}
                 active={activeCard}
@@ -68,10 +67,10 @@ export const Projects = () => {
 
         {/* Flecha derecha */}
         <button
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white"
+          className="absolute md:w-44 right-0 top-1/2 -translate-y-1/2 z-10 p-2  hover:bg-opacity-70 text-white"
           onClick={() => scrollCarousel("right")}
         >
-          <i className="fas fa-chevron-right fa-2x" />
+          <i className="fas fa-chevron-right fa-5x opacity-50" />
         </button>
       </div>
     </section>

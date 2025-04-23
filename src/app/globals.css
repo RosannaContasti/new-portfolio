@@ -24,6 +24,11 @@ body {
   background: var(--background);
   color: var(--background);
   font-family: "Work Sans", Arial, Helvetica, sans-serif;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .text-title {
@@ -44,25 +49,30 @@ body {
 }
 
 .menu-items-hover {
-  @apply  text-white transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-pink-500
+  @apply text-white transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-pink-500;
 }
 
-
-
 @keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-3px); }
-  50% { transform: translateX(3px); }
-  75% { transform: translateX(-3px); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .hover-shake:hover {
   animation: shake 0.2s ease-in-out infinite;
 }
-
-
-
 
 /* html {
   scroll-snap-type: y mandatory;
@@ -111,8 +121,8 @@ body {
   right: 0;
   height: 7px;
   background: #ff66c4;
-  bottom: 0px;  /* Distancia desde el fondo de la pantalla */
-  transform: scaleX(0);  /* Inicialmente el progreso está en 0 */
-  transform-origin: left center;  /* El progreso se "crece" desde la izquierda */
-  transition: transform 0.25s ease-out;  /* Suavizar la animación */
+  bottom: 0px; /* Distancia desde el fondo de la pantalla */
+  transform: scaleX(0); /* Inicialmente el progreso está en 0 */
+  transform-origin: left center; /* El progreso se "crece" desde la izquierda */
+  transition: transform 0.25s ease-out; /* Suavizar la animación */
 }
