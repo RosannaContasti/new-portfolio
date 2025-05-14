@@ -6,6 +6,7 @@ import { PiFilePdfDuotone } from "react-icons/pi"; // PDF
 import { IoDocumentTextOutline } from "react-icons/io5"; // Curriculum
 import { SocialMediaIcons } from "@/components/SocialMediaIcons";
 import Image from "next/image";
+import { CgArrowTopRight } from "react-icons/cg";
 
 const socialLinks = [
   {
@@ -28,7 +29,7 @@ const socialLinks = [
 
 const Contact = () => {
   return (
-    <div
+    <section
       id="contact"
       className="h-screen flex flex-col md:flex-row text-center bg-white"
     >
@@ -66,6 +67,7 @@ const Contact = () => {
 
       {/* -------------- */}
       <div className="w-full md:w-1/2 p-10 flex flex-col justify-end items-end">
+        {/*  */}
         <Image
           src="/image2.png" // Ruta local (en public/)
           alt="Descripción de la imagen"
@@ -73,11 +75,18 @@ const Contact = () => {
           height={100} // Alto en píxeles
           className=" w-96 max-w-full object-cover"
         />
-        <button className="bg-black text-white w-56 h-16 font-bold md:my-24 md:mx-28 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl hover:bg-[#ffffff] hover:text-black">
-          CONTACTAME
+        <button
+          className="flex flex-row justify-center items-center md:mb-30"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          <span className="text-2xl mr-2 relative group">
+            Back to top
+            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-black transition-all duration-500 group-hover:w-full group-hover:left-0" />
+          </span>
+          <CgArrowTopRight size={28} />
         </button>
       </div>
-    </div>
+    </section>
   );
 };
 

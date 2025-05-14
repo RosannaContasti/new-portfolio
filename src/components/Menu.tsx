@@ -1,24 +1,38 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
+//import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import { Link } from "react-scroll"; // Para un smooth scroll entre secciones
+import { Link } from "react-scroll"; // Para scroll suave
+//import { useRouter } from "next/router";
 
 const HamburgerMenu = () => {
+  // const router = useRouter();
+  // const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
+  const locale = useLocale();
+  const t = useTranslations();
+
+  const changeLanguage = () => {
+    //  const router = useRouter();
+    const newLocale = router.locale === "en" ? "es" : "en";
+    console.log({ locale });
+    router.push(router.asPath, router.asPath, { locale: newLocale });
+  };
 
   const pages = [
-    { name: "Home", id: "home" },
-    { name: "About", id: "about" },
-    { name: "Technologies", id: "technologies" },
-    { name: "Projects", id: "projects" },
-    { name: "Contact", id: "contact" },
-    { name: "Epanol", id: "" },
+    { name: t("Home.home"), id: "home" },
+    { name: t("About.title"), id: "about" },
+    { name: t("Technololgies.title"), id: "technologies" },
+    { name: t("Projects.title"), id: "projects" },
+    { name: t("Contact.title"), id: "contact" },
+    { name: locale === "en" ? "ES" : "EN", id: "home" },
   ];
 
   return (
-    <div className="relative">
-      {/* Icono de menú hamburguesa */}
+    <div className="relative z-20">
+      {/* Icono hamburguesa */}
       <button
         className="absolute top-6 left-6 z-20 flex flex-col items-center space-y-1 p-2"
         onClick={toggleMenu}
@@ -50,15 +64,24 @@ const HamburgerMenu = () => {
           <ul className="space-y-8">
             {pages.map((menuItem, index) => (
               <li key={index}>
-                <Link
-                  to={menuItem.id}
-                  smooth={true}
-                  duration={500}
-                  className="cursor-pointer menu-items-hover"
-                  onClick={toggleMenu}
-                >
-                  {menuItem.name}
-                </Link>
+                {menuItem.id === "language" ? (
+                  <button
+                    onClick={changeLanguage}
+                    className="cursor-pointer menu-items-hover"
+                  >
+                    {menuItem.name}
+                  </button>
+                ) : (
+                  <Link
+                    to={menuItem.id}
+                    smooth={true}
+                    duration={500}
+                    className="cursor-pointer menu-items-hover"
+                    onClick={toggleMenu}
+                  >
+                    {menuItem.name}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

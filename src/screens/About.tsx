@@ -1,21 +1,26 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+//import { motion } from "framer-motion";
+import { gsap } from "gsap";
+import { SplitText } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Title from "@/components/Title";
+
+gsap.registerPlugin(SplitText, ScrollTrigger);
+
 const About = () => {
+  const t = useTranslations("About");
+
   return (
     <div id="about" className="h-screen flex flex-col text-center">
-      <span className="subtitle flex-1 flex items-center justify-center">
-        About me
-      </span>
-
+      <Title
+        section="About"
+        title="title"
+        className="title subtitle flex-1 flex items-center justify-center"
+      />
       <span className="text-white text-base md:text-2xl flex-1 flex items-start justify-center px-5 md:px-10">
-        Hola, soy Rosanna Contasti, programadora frontend con experiencia en
-        React y React Native. Me encanta dar vida a proyectos usando
-        herramientas como MUI, Tailwind, Bootstrap y Styled Components, siempre
-        con un enfoque en diseño responsive para asegurarme de que todo se vea
-        genial sin importar el dispositivo. Creo que el frontend es más que solo
-        código: es una mezcla de creatividad y funcionalidad, donde cada
-        componente y cada estilo contribuyen a una experiencia que realmente
-        conecta con las personas. ¡Me encanta ese desafío!
+        {t("description")}
       </span>
     </div>
   );

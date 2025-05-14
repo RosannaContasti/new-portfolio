@@ -7,31 +7,29 @@ import HomeSection from "@/screens/Home";
 import { Projects } from "@/screens/Projects";
 import Technologies from "@/screens/Technologies";
 import HamburgerMenu from "@/components/Menu";
-import { motion } from "framer-motion";
+import Slider from "@/components/Prueba";
+import { ScrollTrigger } from "gsap/all";
+import { gsap } from "gsap";
+
+gsap.registerPlugin(ScrollTrigger); // <--- FALTA ESTO
 
 export default function Home() {
   useEffect(() => {
     const progressBar = document.querySelector(".progress") as HTMLElement;
 
-    const updateProgress = () => {
-      // Calculamos el porcentaje de desplazamiento
-      const scrollTop = window.scrollY;
-      const docHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollTop / docHeight) * 100;
+    if (!progressBar) return;
 
-      // Actualizamos el ancho de la barra de progreso
-      if (progressBar) {
-        progressBar.style.transform = `scaleX(${scrollPercent / 100})`;
-      }
-    };
+    ScrollTrigger.create({
+      start: 0,
+      end: document.body.scrollHeight - window.innerHeight,
+      onUpdate: (self) => {
+        const progress = self.progress; // entre 0 y 1
+        progressBar.style.transform = `scaleX(${progress})`;
+      },
+    });
 
-    // Escuchamos el evento de scroll
-    window.addEventListener("scroll", updateProgress);
-
-    // Limpiamos el evento cuando el componente se desmonta
     return () => {
-      window.removeEventListener("scroll", updateProgress);
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
@@ -40,68 +38,11 @@ export default function Home() {
       <HamburgerMenu />
       <HomeSection />
       <About />
-      <Projects />
+      <Slider />
+      {/* <Projects /> */}
       <Technologies />
       <Contact />
       <div className="progress" />
     </>
-
-    // <>
-    // <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
-    //   <HamburgerMenu />
-    //   <motion.section
-    //     id="home"
-    //     className="snap-start h-screen"
-    //     initial={{ opacity: 0, y: 50 }}
-    //     whileInView={{ opacity: 1, y: 0 }}
-    //     transition={{ duration: 0.6, ease: "easeOut" }}
-    //   >
-    //     <section>
-    //     <HomeSection />
-
-    //     </section>
-    //   </motion.section>
-
-    //   <motion.section
-    //     id="about"
-    //     className="snap-start h-screen w-screen"
-    //     initial={{ opacity: 0, y: 50 }}
-    //     whileInView={{ opacity: 1, y: 0 }}
-    //     transition={{ duration: 0.6, ease: "easeOut" }}
-    //   >
-    //     <About />
-    //   </motion.section>
-
-    //   <motion.section
-    //     id="projects"
-    //     className="snap-start h-screen"
-    //     initial={{ opacity: 0, y: 50 }}
-    //     whileInView={{ opacity: 1, y: 0 }}
-    //     transition={{ duration: 0.6, ease: "easeOut" }}
-    //   >
-    //     <Projects />
-    //   </motion.section>
-
-    //   <motion.section
-    //     id="technologies"
-    //     className="snap-start h-screen"
-    //     initial={{ opacity: 0, y: 50 }}
-    //     whileInView={{ opacity: 1, y: 0 }}
-    //     transition={{ duration: 0.6, ease: "easeOut" }}
-    //   >
-    //     <Technologies />
-    //   </motion.section>
-
-    //   <motion.section
-    //     id="contact"
-    //     className="snap-start h-screen"
-    //     initial={{ opacity: 0, y: 50 }}
-    //     whileInView={{ opacity: 1, y: 0 }}
-    //     transition={{ duration: 0.6, ease: "easeOut" }}
-    //   >
-    //     <Contact />
-    //   </motion.section>
-    // </div>
-    // </>
   );
 }
