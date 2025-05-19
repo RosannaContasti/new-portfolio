@@ -1,25 +1,44 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
-//import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import { useTranslations } from "next-intl";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-scroll"; // Para scroll suave
-//import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+
+export const COOKIE_LOCALE_KEY = "__rosanna_portfolio_locale";
 
 const HamburgerMenu = () => {
-  // const router = useRouter();
-  // const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
-  const locale = useLocale();
   const t = useTranslations();
+  const router = useRouter();
+  const [locale, setLocale] = useState("");
 
-  const changeLanguage = () => {
-    //  const router = useRouter();
-    const newLocale = router.locale === "en" ? "es" : "en";
-    console.log({ locale });
-    router.push(router.asPath, router.asPath, { locale: newLocale });
-  };
+  useEffect(() => {
+    const cookieLocale = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(`${COOKIE_LOCALE_KEY}=`))
+      ?.split("=")[1];
+    if (cookieLocale) {
+      console.log("cookieLocale", cookieLocale);
+      setLocale(cookieLocale);
+    } else {
+      const browserLocale = navigator.language.slice(0, 2);
+      console.log("browserLocale", browserLocale);
+
+      setLocale(browserLocale);
+      document.cookie = `${COOKIE_LOCALE_KEY}=${browserLocale}`;
+      router.refresh();
+      //location.reload();
+    }
+  }, [router]);
+
+  function changeLanguage(newLocale: string) {
+    setLocale(newLocale);
+    document.cookie = `${COOKIE_LOCALE_KEY}=${newLocale}`;
+    router.refresh();
+    //location.reload();
+  }
 
   const pages = [
     { name: t("Home.home"), id: "home" },
@@ -27,7 +46,7 @@ const HamburgerMenu = () => {
     { name: t("Technololgies.title"), id: "technologies" },
     { name: t("Projects.title"), id: "projects" },
     { name: t("Contact.title"), id: "contact" },
-    { name: locale === "en" ? "ES" : "EN", id: "home" },
+    { name: locale == "en" ? "ES" : "EN", id: "language" },
   ];
 
   return (
@@ -66,7 +85,10 @@ const HamburgerMenu = () => {
               <li key={index}>
                 {menuItem.id === "language" ? (
                   <button
-                    onClick={changeLanguage}
+                    onClick={() => {
+                      changeLanguage(locale === "en" ? "es" : "en");
+                      toggleMenu();
+                    }}
                     className="cursor-pointer menu-items-hover"
                   >
                     {menuItem.name}

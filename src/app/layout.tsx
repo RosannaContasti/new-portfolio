@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-//import { getMessages } from "next-intl/server"; // Usamos getMessages para cargar los mensajes
 import { NextIntlClientProvider } from "next-intl";
-//import { useRouter } from "next/router";
-import { getLocale } from "next-intl/server";
+//import { getMessages } from "../../lib/getMessages";
+//import { getLocale } from "../../lib/getLocale";
+import { getLocale, getMessages } from "next-intl/server";
 
 // Fuentes
 const geistSans = Geist({
@@ -28,15 +28,20 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   // Obtener el idioma y las traducciones desde el servidor
+  const messages = await getMessages();
   const locale = await getLocale();
-  // const messages = await getMessages(locale); // Cargar los mensajes para el idioma actual
+
+  console.log({locale})
+  console.log({messages})
 
   return (
     <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -10,6 +10,16 @@ import HamburgerMenu from "@/components/Menu";
 import Slider from "@/components/Prueba";
 import { ScrollTrigger } from "gsap/all";
 import { gsap } from "gsap";
+import { getMessages } from "next-intl/server";
+import { AbstractIntlMessages } from "next-intl";
+
+// export async function generateMetadata({
+//   params: { locale },
+// }: {
+//   params: { locale: string };
+// }) {
+//   const messages: AbstractIntlMessages = await getMessages({ locale });
+// }
 
 gsap.registerPlugin(ScrollTrigger); // <--- FALTA ESTO
 

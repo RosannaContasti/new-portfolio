@@ -70,7 +70,8 @@ const Technologies = () => {
     >
       <div className="flex md:flex-row flex-col h-[50vh] items-center">
         <Title
-          title="Software Skills"
+          section="Technololgies"
+          title="title"
           className="subtitle my-10 md:mt-0 md:w-1/2 flex md:flex-row justify-center items-center"
         />
 
@@ -92,7 +93,8 @@ const Technologies = () => {
 
       <div className="flex md:flex-row flex-col h-[50vh] items-center">
         <Title
-          title="Personal Skills"
+          section="Technololgies"
+          title="secondTitle"
           className="subtitle my-10 md:mt-0 md:w-1/2 flex md:flex-row justify-center items-center"
         />
         <div>

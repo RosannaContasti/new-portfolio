@@ -9,13 +9,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
 interface TitleProps {
-  section?: string | null;
-  title?: string | undefined;
+  section?: string;
+  title: string;
   className?: string;
 }
 
 const Title = ({ section, title, className }: TitleProps) => {
-  console.log(section, title);
   const t = useTranslations(section);
   const titleRef = useRef(null);
 
@@ -48,7 +47,7 @@ const Title = ({ section, title, className }: TitleProps) => {
 
   return (
     <div ref={titleRef} className={`${className}`}>
-      {t(title) || title}
+      {t(title)}
     </div>
   );
 };
