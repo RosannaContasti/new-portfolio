@@ -4,26 +4,47 @@ import { useEffect } from "react";
 import About from "@/screens/About";
 import Contact from "@/screens/Contact";
 import HomeSection from "@/screens/Home";
-import { Projects } from "@/screens/Projects";
+//import { Projects } from "@/screens/Projects";
 import Technologies from "@/screens/Technologies";
 import HamburgerMenu from "@/components/Menu";
 import Slider from "@/components/Prueba";
-import { ScrollTrigger } from "gsap/all";
+import { ScrollTrigger, TextPlugin } from "gsap/all";
 import { gsap } from "gsap";
-import { getMessages } from "next-intl/server";
-import { AbstractIntlMessages } from "next-intl";
+import Loader from "@/screens/Loader";
 
-// export async function generateMetadata({
-//   params: { locale },
-// }: {
-//   params: { locale: string };
-// }) {
-//   const messages: AbstractIntlMessages = await getMessages({ locale });
-// }
-
-gsap.registerPlugin(ScrollTrigger); // <--- FALTA ESTO
+gsap.registerPlugin(ScrollTrigger, TextPlugin); // <--- FALTA ESTO
 
 export default function Home() {
+  useEffect(() => {
+    const loader = document.querySelector(".loader-screen");
+    const text = document.querySelector(".loader-text");
+
+    if (!loader || !text) return;
+
+    const timeline = gsap.timeline();
+
+    timeline
+      .to(text, {
+        text: "Bienvenido", // Animación tipo máquina de escribir
+        duration: 2,
+        ease: "power1.inOut",
+        delay: 0,
+      })
+      .to(loader, {
+        y: "-100%", // Cortina hacia arriba
+        duration: 1.2,
+        ease: "power3.inOut",
+        delay: 0.5,
+        onComplete: () => {
+          loader.style.display = "none";
+        },
+      });
+
+    return () => {
+      timeline.kill(); // limpia la animación si se desmonta el componente
+    };
+  }, []);
+
   useEffect(() => {
     const progressBar = document.querySelector(".progress") as HTMLElement;
 
@@ -45,6 +66,10 @@ export default function Home() {
 
   return (
     <>
+      {/* Loader - Cortina */}
+
+      <Loader />
+      {/* Tu contenido principal */}
       <HamburgerMenu />
       <HomeSection />
       <About />

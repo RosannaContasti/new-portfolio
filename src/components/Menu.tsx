@@ -4,8 +4,7 @@ import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-scroll"; // Para scroll suave
 import { useRouter } from "next/navigation";
-
-export const COOKIE_LOCALE_KEY = "__rosanna_portfolio_locale";
+import { COOKIE_LOCALE_KEY } from "@/constants/locale";
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,31 +18,30 @@ const HamburgerMenu = () => {
       .split("; ")
       .find((row) => row.startsWith(`${COOKIE_LOCALE_KEY}=`))
       ?.split("=")[1];
+
     if (cookieLocale) {
       console.log("cookieLocale", cookieLocale);
       setLocale(cookieLocale);
     } else {
       const browserLocale = navigator.language.slice(0, 2);
       console.log("browserLocale", browserLocale);
-
       setLocale(browserLocale);
-      document.cookie = `${COOKIE_LOCALE_KEY}=${browserLocale}`;
-      router.refresh();
-      //location.reload();
+      document.cookie = `${COOKIE_LOCALE_KEY}=${browserLocale};`;
+      // router.refresh();
+      //  window.location.reload();
     }
   }, [router]);
 
   function changeLanguage(newLocale: string) {
     setLocale(newLocale);
     document.cookie = `${COOKIE_LOCALE_KEY}=${newLocale}`;
-    router.refresh();
-    //location.reload();
+    window.location.href = window.location.pathname; // 🔄 Fuerza recarga con nuevo idioma
   }
 
   const pages = [
     { name: t("Home.home"), id: "home" },
     { name: t("About.title"), id: "about" },
-    { name: t("Technololgies.title"), id: "technologies" },
+    { name: t("Technologies.title"), id: "technologies" },
     { name: t("Projects.title"), id: "projects" },
     { name: t("Contact.title"), id: "contact" },
     { name: locale == "en" ? "ES" : "EN", id: "language" },

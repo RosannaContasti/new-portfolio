@@ -239,3 +239,16 @@ body {
 @keyframes blink {
   50% { border-color: transparent }
 }
+
+/* LOADER SCREEN */
+
+.loader-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 100vw;
+  height: 100vh;
+  background: #0f0f0f; /* o el color que quieras */
+  transform: translateY(0%);
+}

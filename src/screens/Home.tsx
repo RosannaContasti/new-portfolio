@@ -1,14 +1,14 @@
 "use client";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Typewriter } from "react-simple-typewriter";
+import AnimatedSphere from "@/components/AnimatedSphere";
 
 const HomeSection = () => {
   const t = useTranslations("Header");
   return (
     <div
       id="home"
-      className="min-h-screen bg-no-repeat bg-cover bg-center flex flex-col-reverse md:flex-row justify-center"
+      className="min-h-screen bg-no-repeat bg-cover bg-center flex flex-col-reverse md:flex-row justify-center md:justify-between"
       style={{ backgroundImage: "url('/bg.png')" }}
     >
       {/* Contenedor de texto */}
@@ -33,15 +33,8 @@ const HomeSection = () => {
       </div>
 
       {/* Contenedor de imagen */}
-      <div className="flex justify-center">
-        <Image
-          src="/bole.png"
-          alt="Descripción de la imagen"
-          width={200}
-          height={100}
-          quality={100}
-          className="w-full h-auto md:h-screen max-w-full object-contain"
-        />
+      <div className="flex justify-center bg-amber-600">
+        <AnimatedSphere />
       </div>
     </div>
   );

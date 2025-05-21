@@ -1,4 +1,4 @@
-import { COOKIE_LOCALE_KEY } from "@/components/Menu";
+import { COOKIE_LOCALE_KEY } from "@/constants/locale";
 import { getRequestConfig } from "next-intl/server";
 import { cookies } from "next/headers";
 
@@ -12,6 +12,6 @@ export default getRequestConfig(async () => {
 
   return {
     locale,
-    messages: (await import(`../../messages/${locale}.json`)).default,
+    messages: (await import(`../messages/${locale}.json`)).default,
   };
 });

@@ -7,7 +7,6 @@ import { RiNextjsLine } from "react-icons/ri";
 import { TbBrandReactNative } from "react-icons/tb";
 import { SiMui } from "react-icons/si";
 import { BiLogoTailwindCss } from "react-icons/bi";
-//import TechnologyCard from "@/components/TechnologyCard";
 import { TbBrandTypescript } from "react-icons/tb";
 import { DiJavascript1 } from "react-icons/di";
 import { TiCss3 } from "react-icons/ti";
@@ -70,7 +69,7 @@ const Technologies = () => {
     >
       <div className="flex md:flex-row flex-col h-[50vh] items-center">
         <Title
-          section="Technololgies"
+          section="Technologies"
           title="title"
           className="subtitle my-10 md:mt-0 md:w-1/2 flex md:flex-row justify-center items-center"
         />
@@ -93,7 +92,7 @@ const Technologies = () => {
 
       <div className="flex md:flex-row flex-col h-[50vh] items-center">
         <Title
-          section="Technololgies"
+          section="Technologies"
           title="secondTitle"
           className="subtitle my-10 md:mt-0 md:w-1/2 flex md:flex-row justify-center items-center"
         />
